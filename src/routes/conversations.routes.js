@@ -1,5 +1,7 @@
 const { Router } = require("express");
 const authenticate = require("../middlewares/auth.middleware");
+const { createConversationValidator } = require("../validators/conversation.validators");
+
 const { 
     findAllConversations, 
     createConversations, 
@@ -14,7 +16,7 @@ const router = Router();
 
 router.get("/conversations", findAllConversations);
 
-router.post("/conversations", authenticate, createConversations);
+router.post("/conversations", authenticate, createConversationValidator, createConversations);
 
 router.post("/conversations/id/:id/add", addUserConversation);
 
